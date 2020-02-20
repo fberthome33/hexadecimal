@@ -16,6 +16,7 @@
     "express-session": "^1.17.0",
     "hex2dec": "^1.1.2",
     "nodemon": "^2.0.2",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5"
   }
 }

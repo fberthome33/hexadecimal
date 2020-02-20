@@ -1,0 +1,39 @@
+<%- include('header')%>
+
+<form action ="/convert" method="post" class="ui form">
+    <div class="field required">
+        <label>Field To Convert</label>
+        <input type="text" name="fieldToConvert" placeholder="Field To Convert">
+    </div>
+
+    <div class="grouped fields">
+        <label for="convertMethod">Select your conversion method</label>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="convertMethod" value="hexaToDec" checked/>
+                <label>To Hexadecimal</label>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="convertMethod" value="decToHexa"/>
+                <label>To Decimal</label>
+            </div>
+        </div>
+    </div>
+    <div class="button"><button type="submit">Convert</button></div>
+</form>
+
+<div class="ui segment">
+  <div class="ui two column grid">
+   <div class="column">
+        <h3 class="ui dividing header">Result: </h3>
+            <span><%=value%></span>
+    </div>
+
+    <div class="column">
+        <h3 class="ui dividing header">Story</h3>
+            <span><%=story%></span>
+    </div>
+</div>
+<%- include ('footer')%>
