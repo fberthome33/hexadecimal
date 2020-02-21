@@ -1,6 +1,6 @@
 let express = require('express')
 let session = require('express-session')
-var converter = require('./utils/hexaDecimalConverter');
+var converter = require('./service/hexaDecimalConverter');
 var storyService = require('./service/storyService');
 
 let app = express()
