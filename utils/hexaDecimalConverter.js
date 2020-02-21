@@ -1,9 +1,10 @@
 var converterLib = require('hex2dec');
-class Converter {
+class HexaDecimalConverter {
 
     static convert(input, convertMethod) {
-        let convertResult
+        let convertResult;
         if (convertMethod === "hexaToDec") {
+            console.log(input)
             convertResult = converterLib.hexToDec(input)
         } else if (convertMethod === "decToHexa") {
             convertResult = converterLib.decToHex(input);
@@ -12,4 +13,4 @@ class Converter {
     }
 }
 
-module.exports = Converter
+module.exports = HexaDecimalConverter

@@ -1,6 +1,6 @@
 let express = require('express')
 let session = require('express-session')
-var converter = require('./service/converter');
+var converter = require('./utils/hexaDecimalConverter');
 var storyService = require('./service/storyService');
 
 let app = express()
@@ -29,17 +29,17 @@ app.post('/convert' , (request, response) => {
         response.redirect('/')
     }
     else {
-
         let convertMethod = request.body.convertMethod;
         let convertResult = converter.convert(fieldToConvert, convertMethod)
-        const storyErrorMsg = "Eror retrieving story"
+        let decimalNumber = decimalInput(fieldToConvert, convertResult, convertMethod)
+        const storyErrorMsg = "Error retrieving story"
+
         try {
-            storyService.getStory(fieldToConvert, convertResult, convertMethod)
+            storyService.getStory(decimalNumber)
             .then(function(results){
                 story = results.text;
                 response.render('index', {value: convertResult, story : story})
             }).catch(e => {
-                console.log(e)
                 response.render('index', {value: convertResult, story : storyErrorMsg})
             })
         } catch(err) {
@@ -50,6 +50,14 @@ app.post('/convert' , (request, response) => {
     
 })
 
-
+function decimalInput(input, convertedInput, convertMethod) {
+    let decimalNumber
+    if (convertMethod === "hexaToDec") {
+        decimalNumber = convertedInput
+    } else if (convertMethod === "decToHexa") {
+        decimalNumber = input
+    }
+    return decimalNumber;
+}
 
 app.listen(8080)
