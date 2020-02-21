@@ -39,12 +39,11 @@ app.post('/convert' , (request, response) => {
             .then(function(results){
                 story = results.text;
                 response.render('index', {value: convertResult, story : story})
-            }).catch(e => {
-                response.render('index', {value: convertResult, story : storyErrorMsg})
+            }).catch(err => {
+                response.render('index', {value: convertResult, story : err})
             })
         } catch(err) {
-                console.log('Error retriving story');
-                response.render('index', {value: convertResult, story : storyErrorMsg})
+                response.render('index', {value: convertResult, story : err})
         }
     }
     
