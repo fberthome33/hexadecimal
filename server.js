@@ -1,22 +1,22 @@
-let express = require('express')
-let session = require('express-session')
+let express = require('express');
+let session = require('express-session');
 var converter = require('./service/hexaDecimalConverter');
 var storyService = require('./service/storyService');
 
-let app = express()
+let app = express();;
 app.set('views', './views');
-app.set('view engine', 'ejs')
-app.use(express.urlencoded({ extended: true }))
-app.use('/assets', express.static('public'))
-app.use(session({ secret: 'hexadecimal', resave: false, saveUninitialized: true, cookie: { secure: false }}))
-app.use(require('./middlewares/flash'))
+app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: true }));
+app.use('/assets', express.static('public'));
+app.use(session({ secret: 'hexadecimal', resave: false, saveUninitialized: true, cookie: { secure: false }}));
+app.use(require('./middlewares/flash'));
 
 
 
 
 
 app.get('/' , (request, response) => {
-    response.render('index', {value: "", story : ''})
+    response.render('index', {value: "", story : ''});
 })
 
 
@@ -30,31 +30,30 @@ app.post('/convert' , (request, response) => {
     }
     else {
         let convertMethod = request.body.convertMethod;
-        let convertResult = converter.convert(fieldToConvert, convertMethod)
-        let decimalNumber = decimalInput(fieldToConvert, convertResult, convertMethod)
-        const storyErrorMsg = "Error retrieving story"
+        let convertResult = converter.convert(fieldToConvert, convertMethod);
+        let decimalNumber = decimalInput(fieldToConvert, convertResult, convertMethod);
 
         try {
             storyService.getStory(decimalNumber)
             .then(function(results){
                 story = results.text;
-                response.render('index', {value: convertResult, story : story})
+                response.render('index', {value: convertResult, story : story});
             }).catch(err => {
-                response.render('index', {value: convertResult, story : err})
+                response.render('index', {value: convertResult, story : err});
             })
         } catch(err) {
-                response.render('index', {value: convertResult, story : err})
+                response.render('index', {value: convertResult, story : err});
         }
     }
     
 })
 
 function decimalInput(input, convertedInput, convertMethod) {
-    let decimalNumber
+    let decimalNumber;
     if (convertMethod === "hexaToDec") {
-        decimalNumber = convertedInput
+        decimalNumber = convertedInput;
     } else if (convertMethod === "decToHexa") {
-        decimalNumber = input
+        decimalNumber = input;
     }
     return decimalNumber;
 }

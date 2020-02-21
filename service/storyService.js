@@ -1,6 +1,6 @@
 const http = require('http');
-const URL = 'http://numbersapi.com/NUMBER_PARAM?json'
-const REQUEST_TIMEOUT = 5000
+const URL = 'http://numbersapi.com/NUMBER_PARAM?json';
+const REQUEST_TIMEOUT = 5000;
 
 class StoryService {
 
@@ -27,4 +27,4 @@ class StoryService {
     }
     
 }
-module.exports = StoryService
+module.exports = StoryService;
