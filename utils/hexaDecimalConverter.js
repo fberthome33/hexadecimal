@@ -11,5 +11,4 @@ class HexaDecimalConverter {
         return convertResult;
     }
 }
-
 module.exports = HexaDecimalConverter;

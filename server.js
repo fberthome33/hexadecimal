@@ -1,6 +1,7 @@
 let express = require('express');
 let session = require('express-session');
-var converter = require('./service/hexaDecimalConverter');
+var converter = require('./utils/hexaDecimalConverter');
+var formUtils = require('./utils/formUtils');
 var storyService = require('./service/storyService');
 
 let app = express();;
@@ -19,9 +20,6 @@ app.get('/' , (request, response) => {
     response.render('index', {value: "", story : ''});
 })
 
-
-
-
 app.post('/convert' , (request, response) => {
     let fieldToConvert = request.body.fieldToConvert;
     if(fieldToConvert === undefined || fieldToConvert === "") {
@@ -31,7 +29,7 @@ app.post('/convert' , (request, response) => {
     else {
         let convertMethod = request.body.convertMethod;
         let convertResult = converter.convert(fieldToConvert, convertMethod);
-        let decimalNumber = decimalInput(fieldToConvert, convertResult, convertMethod);
+        let decimalNumber = formUtils.decimalInput(fieldToConvert, convertResult, convertMethod);
 
         try {
             storyService.getStory(decimalNumber)
@@ -47,15 +45,5 @@ app.post('/convert' , (request, response) => {
     }
     
 })
-
-function decimalInput(input, convertedInput, convertMethod) {
-    let decimalNumber;
-    if (convertMethod === "hexaToDec") {
-        decimalNumber = convertedInput;
-    } else if (convertMethod === "decToHexa") {
-        decimalNumber = input;
-    }
-    return decimalNumber;
-}
 
 app.listen(8080)
