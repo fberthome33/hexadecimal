@@ -26,4 +26,8 @@ describe('Converter', function() {
   it('convert() should return null if the input is XXX and method equals to decToHexa', function() {
     expect(Converter.convert("XXX", "decToHexa")).to.equal(null);
   });
+
+  it('decimalInput() should throw error if the input is 16 and 10 and method equals to decToDec', () => {
+    expect(() => Converter.convert("XXX", "decToDec")).to.throw(Error, 'Unsupported convertion method: decToDec');
+  });
 });

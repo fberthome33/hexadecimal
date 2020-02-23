@@ -7,6 +7,8 @@ class HexaDecimalConverter {
             convertResult = converterLib.hexToDec(input);
         } else if (convertMethod === "decToHexa") {
             convertResult = converterLib.decToHex(input);
+        } else {
+            throw new Error("Unsupported convertion method: " + convertMethod)
         }
         return convertResult;
     }

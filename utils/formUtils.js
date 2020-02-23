@@ -5,6 +5,8 @@ class FormUtils {
             decimalNumber = convertedInput;
         } else if (convertMethod === "decToHexa") {
             decimalNumber = input;
+        } else {
+            throw new Error("Unsupported convertion method: " + convertMethod);
         }
         return decimalNumber;
     }
